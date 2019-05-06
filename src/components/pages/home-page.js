@@ -1,9 +1,13 @@
-import React from 'react';
-import BookList from "../book-list";
+import React from 'react';//eslint-disable-line
+import BookList from "../book-list";//eslint-disable-line
+import ShopCartTable from '../shop-cart-table/shop-cart-table';//eslint-disable-line
 
 const HomePage = () => {
   return (
-    <BookList />
+    <div>
+      <BookList />
+      <ShopCartTable />
+    </div>
   );
 }
  
