@@ -18,7 +18,7 @@ class BookList extends Component {
   render() { 
     const { books } = this.props;
     return (
-      <ul>
+      <ul className="book-list">
         {
           books.map((book) => {
             return (
@@ -35,10 +35,10 @@ const mapStateToProps = ({books}) => {
   return { books };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     booksLoaded
-  });
+  }, dispatch);
 };
  
-export default withBookstoreService(connect( mapStateToProps, mapDispatchToProps)(BookList));
+export default withBookstoreService()(connect( mapStateToProps, mapDispatchToProps)(BookList));
