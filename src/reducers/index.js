@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
         loading: false,
         error: null        
       }
-    };
+    }
     case 'FETCH_BOOKS_FAILURE': {
       return {
         ...state,
@@ -39,10 +39,27 @@ const reducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       };
-    };
+    }
+    case 'BOOKS_ADDED_TO_CART': {
+      const bookId = action.payload;
+      const book = state.books.find((book) => book.id ===bookId);
+      const newItem = {
+        id: book.id,
+        name: book.title,
+        count: 1,
+        total: book.price
+      };
+      return {
+        ...state,
+        cartItems: [
+          ...state.cartItems,
+          newItem
+        ]
+      }
+    }
     default: {
       return state;
-    };
+    }
   }
 }
 
