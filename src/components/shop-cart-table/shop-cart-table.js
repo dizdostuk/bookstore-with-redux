@@ -1,15 +1,16 @@
 import React from 'react';//eslint-disable-line
 import { connect } from "react-redux";
+import { bookIncrease, bookDecrease, bookDelete, bookAddedToCart } from "../../actions"; //eslint-disable-line
 import "./shop-cart-table.css";
 
 const ShopCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
   
   const renderRow = (item, idx) => {
-    const { id, name, count, total } = item;
+    const { id, title, count, total } = item;
     return (
       <tr key={id}>
         <td>{idx}</td>
-        <td>{name}</td>
+        <td>{title}</td>
         <td>{count}</td>
         <td>{total}</td>
         <td>
@@ -57,23 +58,23 @@ const ShopCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
   );
 };
 
-const mapStateToProps = ({ cartItems, orderTotal }) => {
+const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal } }) => {
   return {
     items: cartItems,
     total: orderTotal
   };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onIncrease: (id) => {
-      console.log(`Increase ${id}`)
+      dispatch(bookAddedToCart(id))
     },
     onDecrease: (id) => {
-      console.log(`Decrease ${id}`)
+      dispatch(bookDecrease(id))
     },
     onDelete: (id) => {
-      console.log(`Delete ${id}`)
+      dispatch(bookDelete(id))
     },
   }
 }

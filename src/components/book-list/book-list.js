@@ -1,13 +1,14 @@
 import React, { Component } from 'react'; // eslint-disable-line
 import BookListItem from "../book-list-item"; // eslint-disable-line
 import Spinner from "../spinner"; //eslint-disable-line
-import ErrorIndicator from "../error-indicator";
+import ErrorIndicator from "../error-indicator"; //eslint-disable-line
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { compose } from '../../utils';
+import { bindActionCreators } from "redux"; //eslint-disable-line
 import { withBookstoreService } from "../hoc";
 import { fetchBooks, bookAddedToCart } from "../../actions";
 import "./book-list.css";
-import BookstoreService from '../../services/bookstore-service';
+import BookstoreService from '../../services/bookstore-service'; //eslint-disable-line
 
 const BookList = ({books, onAddedToCart}) => {
   return (
@@ -49,7 +50,7 @@ class BookListContainer extends Component {
 
 
 
-const mapStateToProps = ({ books, loading, error }) => {
+const mapStateToProps = ({ bookList: { books, loading, error }}) => {
   return { books, loading, error };
 };
 
@@ -60,4 +61,4 @@ const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   }
 };
  
-export default withBookstoreService()(connect( mapStateToProps, mapDispatchToProps)(BookListContainer));
+export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookListContainer));
